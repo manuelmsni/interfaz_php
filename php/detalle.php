@@ -26,7 +26,7 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
 
                     $row = $result->fetch_assoc();
 
-                    echo "<h1 class='separate'>Informe id-" . $id . " <button onclick=\"window.location.href = 'index.php'\">Volver</button></h1>";
+                    echo "<h1 class='separate'>Informe de producto [ ID-" . $id . " ] <button onclick=\"window.location.href = 'index.php'\">Volver</button></h1>";
                     echo "<div class='splitter'>";
 
                     echo "<div><form id='form'>";
