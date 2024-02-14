@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
             throw new Exception("Conexión fallida: " . $conn->connect_error);
         }
 
-        $sql = "DELETE FROM " . TABLE_NAME . " WHERE id = ?";
+        $sql = "DELETE FROM " . HALUA_TABLE_NAME . " WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id);
 

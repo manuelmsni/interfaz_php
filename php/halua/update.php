@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($conn->connect_error) {
             throw new Exception("Conexión fallida: " . $conn->connect_error);
         }
-        $sql = "UPDATE " . TABLE_NAME . " SET nombre = ?, precio = ?, imagen = ?, descripcion = ? WHERE id = ?";
+        $sql = "UPDATE " . HALUA_TABLE_NAME . " SET nombre = ?, precio = ?, imagen = ?, descripcion = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
         if ($stmt === false) {
             throw new Exception("Error en la preparación de la sentencia: " . $conn->error);

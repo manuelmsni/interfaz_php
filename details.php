@@ -17,6 +17,60 @@
 
 <div class="container">
 
+    <script>
+        toDelete = new Array();
+        toAdd = new Array();
+        toUpdate = new Array();
+        function agregarFila(ingrediente, cantidad, id) {
+            var table = document.getElementById("ing-list");
+            var row = table.insertRow(-1);
+
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+
+            var input1 = document.createElement("input");
+            input1.type = "text";
+            if(ingrediente) input1.value = ingrediente;
+
+            cell1.appendChild(input1);
+
+            var input2 = document.createElement("input");
+            input2.type = "number";
+            if(cantidad) input2.value = cantidad;
+
+            cell2.appendChild(input2);
+
+            if(id) {
+                row.setAttribute("id_ing", id);
+                row.setAttribute("changed", "false");
+                input1.onchange = function() {
+                    var row = this.parentNode.parentNode;
+                    if(row.getAttribute("changed") === "false"){
+                        row.setAttribute("changed", "true");
+                        toUpdate.push(row);
+                    }
+                };
+                input2.onchange = function() {
+                    var row = this.parentNode.parentNode;
+                    if(row.getAttribute("changed") === "false"){
+                        row.setAttribute("changed", "true");
+                        toUpdate.push(row);
+                    }
+                };
+            } else toAdd.push(row);
+            cell3.innerHTML = " - ";
+            cell3.className = "btn-delete";
+            cell3.style.cursor = "pointer";
+            cell3.onclick = function() {
+                var row = this.parentNode;
+                toDelete.push(row.getAttribute("id_ing"));
+                row.parentNode.removeChild(row);
+            };
+        }
+
+    </script>
+
     <h2>Ingredientes</h2>
     <div>
         <form id="ing">
@@ -27,11 +81,16 @@
                 <th style="width: 0;min-width: fit-content;white-space: nowrap;text-align: center"><button type="button" onclick="agregarFila()"> + </button></th>
                 </thead>
                 <tbody id="ing-list">
+                    <?php include 'php/ingredientes/list.php'; ?>
                 </tbody>
             </table>
             <button style="margin-top:1rem;" type="submit">Actualizar</button>
         </form>
     </div>
+
+    <script>
+        agregarFila("harina", 200, 2);
+    </script>
 
 </div>
 <script>
@@ -49,39 +108,42 @@
 
         xhr.send(datosFormulario);
     });
+    document.getElementById('ing').addEventListener('submit', function(e) {
+        e.preventDefault();
+        toDelete.forEach(id => {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'php/ingredientes/delete.php', true);
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    console.log(this.responseText);
+                }
+            };
+            xhr.send("id=" + id);
+        });
+        toAdd.forEach(row => {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'php/ingredientes/insert.php', true);
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    console.log(this.responseText);
+                }
+            };
+            xhr.send("ingrediente=" + row.cells[0].children[0].value + "&cantidad=" + row.cells[1].children[0].value);
+        });
+        toUpdate.forEach(row => {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'php/ingredientes/update.php', true);
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    console.log(this.responseText);
+                }
+            };
+            xhr.send("id=" + row.getAttribute("id_ing") + "&ingrediente=" + row.cells[0].children[0].value + "&cantidad=" + row.cells[1].children[0].value);
+        });
+    });
 </script>
 
-<script>
-    function agregarFila() {
-        var table = document.getElementById("ing-list");
-        var row = table.insertRow(-1); // Inserta una fila al final de la tabla
-        var cell1 = row.insertCell(0); // Inserta la primera celda en la fila
-        var cell2 = row.insertCell(1); // Inserta la segunda celda en la fila
-        var cell3 = row.insertCell(2); // Inserta la tercera celda para el botón de eliminar
 
-        // Crea un input para la primera celda
-        var input1 = document.createElement("input");
-        input1.type = "text";
-        cell1.appendChild(input1);
-
-        // Crea un input para la segunda celda
-        var input2 = document.createElement("input");
-        input2.type = "number";
-        cell2.appendChild(input2);
-
-        cell3.innerHTML = " - ";
-        cell3.className = "btn-delete";
-        cell3.style.cursor = "pointer"; // Cambia el cursor para indicar que es clickeable
-        cell3.onclick = function() {
-            // Encuentra la fila (<tr>) que contiene esta celda (<td>)
-            var row = this.parentNode; // 'this' se refiere a la celda (<td>), parentNode sería el <tr>
-
-            // Usa parentNode para encontrar el <tbody> o <table> que contiene la fila y luego eliminar la fila
-            row.parentNode.removeChild(row); // Elimina directamente la fila entera
-        };
-    }
-
-</script>
 <script src="https://manuelmsni.github.io/IMAGG/IMAGG_1.0/js/IMAGG.js"></script>
 </body>
 </html>

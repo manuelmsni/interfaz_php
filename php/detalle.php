@@ -15,7 +15,7 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
             die("Conexión fallida: " . $conn->connect_error);
         }
 
-        $sql = "SELECT * FROM " . TABLE_NAME . " WHERE id = ?";
+        $sql = "SELECT * FROM " . HALUA_TABLE_NAME . " WHERE id = ?";
         if ($stmt = $conn->prepare($sql)) {
             $stmt->bind_param("i", $id);
 

@@ -12,7 +12,7 @@ try {
     }
 
     // Paso 3: Calcular el total de páginas
-    $sqlTotal = "SELECT COUNT(*) AS total FROM " . TABLE_NAME;
+    $sqlTotal = "SELECT COUNT(*) AS total FROM " . HALUA_TABLE_NAME;
     $resultTotal = $conn->query($sqlTotal);
     $rowTotal = $resultTotal->fetch_assoc();
     $totalPages = ceil($rowTotal['total'] / $recordsPerPage);
@@ -29,7 +29,7 @@ try {
     $offset = ($page - 1) * $recordsPerPage; // Calcular el offset después de la posible redirección
 
     // Paso 2: Consulta para la paginación
-    $sql = "SELECT * FROM " . TABLE_NAME . " ORDER BY id DESC LIMIT $offset, $recordsPerPage";
+    $sql = "SELECT * FROM " . HALUA_TABLE_NAME . " ORDER BY id DESC LIMIT $offset, $recordsPerPage";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {

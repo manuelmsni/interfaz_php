@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($conn->connect_error) {
             throw new Exception("Conexión fallida: " . $conn->connect_error);
         }
-        $sql = "INSERT INTO " . TABLE_NAME . " (nombre, precio, imagen, descripcion) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO " . HALUA_TABLE_NAME . " (nombre, precio, imagen, descripcion) VALUES (?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         if ($stmt === false) {
             throw new Exception("Error en la preparación de la sentencia: " . $conn->error);
