@@ -1,9 +1,9 @@
 <?php
 require_once 'conexion.php';
-require_once "php/config.php";
+require_once "../config.php";
 
 $id = $_POST['id'];
-$ingrediente = $_POST['ingrediente'];
+$ingrediente = $_POST['nombre'];
 $cantidad = $_POST['cantidad'];
 
 $query = "UPDATE  ". ING_TABLE_NAME ."  SET ingrediente = '$ingrediente', cantidad = $cantidad WHERE id = $id";

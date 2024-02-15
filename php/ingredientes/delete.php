@@ -1,6 +1,6 @@
 <?php
 require_once 'conexion.php';
-require_once "php/config.php";
+require_once "..p/config.php";
 $id = $_POST['id'];
 
 $query = "DELETE FROM  ". ING_TABLE_NAME ."  WHERE id = $id";

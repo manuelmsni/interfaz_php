@@ -88,9 +88,6 @@
         </form>
     </div>
 
-    <script>
-        agregarFila("harina", 200, 2);
-    </script>
 
 </div>
 <script>
@@ -121,14 +118,37 @@
             xhr.send("id=" + id);
         });
         toAdd.forEach(row => {
+            toAdd.forEach(row => {
+                var nombreInput = row.cells[0].querySelector('input[name="nombre"]');
+                var cantidadInput = row.cells[1].querySelector('input[name="cantidad"]');
+
+                if (nombreInput && cantidadInput) {
+                    var nombre = nombreInput.value;
+                    var cantidad = cantidadInput.value;
+                // Rest of your code
+            } else {
+                // Handle the case where the inputs are not found
+                console.error("Inputs not found in the row:", row);
+            }
+
+            // Obtener el ID del producto desde el atributo del elemento 'product'
+            var halua_id = document.getElementById("product").getAttribute("product_id");
+
+            // Crear una instancia de XMLHttpRequest
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'php/ingredientes/insert.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            // Definir la función de respuesta
             xhr.onload = function() {
                 if (this.status === 200) {
                     console.log(this.responseText);
                 }
             };
-            xhr.send("ingrediente=" + row.cells[0].children[0].value + "&cantidad=" + row.cells[1].children[0].value);
+
+            // Construir y enviar los datos en el cuerpo de la solicitud POST
+            var params = 'nombre=' + encodeURIComponent(nombre) + '&cantidad=' + encodeURIComponent(cantidad) + '&halua_id=' + encodeURIComponent(halua_id);
+            xhr.send(params);
         });
         toUpdate.forEach(row => {
             var xhr = new XMLHttpRequest();
@@ -138,7 +158,7 @@
                     console.log(this.responseText);
                 }
             };
-            xhr.send("id=" + row.getAttribute("id_ing") + "&ingrediente=" + row.cells[0].children[0].value + "&cantidad=" + row.cells[1].children[0].value);
+            xhr.send("id=" + row.getAttribute("id_ing") + "&nombre=" + row.cells[0].children[0].value + "&cantidad=" + row.cells[1].children[0].value );
         });
     });
 </script>
