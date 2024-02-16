@@ -11,7 +11,7 @@ $ingrediente = $_POST['nombre'];
 $cantidad = $_POST['cantidad'];
 $halua_id = $_POST['halua_id'];
 
-$query = "INSERT INTO ". ING_TABLE_NAME ." (ingrediente, cantidad, halua_id) VALUES ('$ingrediente', $cantidad, $halua_id)";
+$query = "INSERT INTO ". ING_TABLE_NAME ." (nombre, cantidad, halua_id) VALUES ('$ingrediente', $cantidad, $halua_id)";
 mysqli_query($conn, $query);
 
 echo "Ingrediente agregado con éxito.";

@@ -31,12 +31,14 @@
 
             var input1 = document.createElement("input");
             input1.type = "text";
+            input1.classList.add("nombre");
             if(ingrediente) input1.value = ingrediente;
 
             cell1.appendChild(input1);
 
             var input2 = document.createElement("input");
             input2.type = "number";
+            input2.classList.add("cantidad");
             if(cantidad) input2.value = cantidad;
 
             cell2.appendChild(input2);
@@ -107,64 +109,85 @@
     });
 
     document.getElementById('ing').addEventListener('submit', function(e) {
-
         e.preventDefault();
 
+        let promises = []; // Almacenará todas las promesas de las solicitudes
+
+        // Procesar eliminaciones
         toDelete.forEach(id => {
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'php/ingredientes/delete.php', true);
-            xhr.onload = function() {
-                if (this.status === 200) {
-                    console.log(this.responseText);
-                }
-            };
-            xhr.send("id=" + id);
+            let promise = new Promise((resolve, reject) => {
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'php/ingredientes/delete.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onload = function() {
+                    if (this.status === 200) {
+                        console.log(this.responseText);
+                        resolve(this.responseText); // Resuelve la promesa cuando la solicitud es exitosa
+                    } else {
+                        reject(new Error('Request failed with status: ' + this.status)); // Rechaza la promesa si falla
+                    }
+                };
+                xhr.send("id=" + encodeURIComponent(id));
+            });
+            promises.push(promise);
         });
 
+        // Procesar adiciones
         toAdd.forEach(row => {
-            var nombreInput = row.cells[0].querySelector('input[name="nombre"]');
-            var cantidadInput = row.cells[1].querySelector('input[name="cantidad"]');
-
-            if (nombreInput && cantidadInput) {
+            let promise = new Promise((resolve, reject) => {
+                var nombreInput = row.cells[0].querySelector('input[class="nombre"]');
+                var cantidadInput = row.cells[1].querySelector('input[class="cantidad"]');
+                if (nombreInput && cantidadInput) {
                     var nombre = nombreInput.value;
                     var cantidad = cantidadInput.value;
-                // Rest of your code
-            } else {
-                // Handle the case where the inputs are not found
-                console.error("Inputs not found in the row:", row);
-            }
+                    var halua_id = document.getElementById("product").getAttribute("product_id");
 
-            // Obtener el ID del producto desde el atributo del elemento 'product'
-            var halua_id = document.getElementById("product").getAttribute("product_id");
-
-            // Crear una instancia de XMLHttpRequest
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'php/ingredientes/insert.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-            // Definir la función de respuesta
-            xhr.onload = function() {
-                if (this.status === 200) {
-                    console.log(this.responseText);
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'php/ingredientes/insert.php', true);
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    xhr.onload = function() {
+                        if (this.status === 200) {
+                            console.log(this.responseText);
+                            resolve(this.responseText);
+                        } else {
+                            reject(new Error('Request failed with status: ' + this.status));
+                        }
+                    };
+                    var params = 'nombre=' + encodeURIComponent(nombre) + '&cantidad=' + encodeURIComponent(cantidad) + '&halua_id=' + encodeURIComponent(halua_id);
+                    xhr.send(params);
+                } else {
+                    console.error("Inputs not found in the row:", row);
+                    reject(new Error("Inputs not found in the row"));
                 }
-            };
-
-            // Construir y enviar los datos en el cuerpo de la solicitud POST
-            var params = 'nombre=' + encodeURIComponent(nombre) + '&cantidad=' + encodeURIComponent(cantidad) + '&halua_id=' + encodeURIComponent(halua_id);
-            xhr.send(params);
+            });
+            promises.push(promise);
         });
 
+        // Procesar actualizaciones
         toUpdate.forEach(row => {
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'php/ingredientes/update.php', true);
-            xhr.onload = function() {
-                if (this.status === 200) {
-                    console.log(this.responseText);
-                }
-            };
-            xhr.send("id=" + row.getAttribute("id_ing") + "&nombre=" + row.cells[0].children[0].value + "&cantidad=" + row.cells[1].children[0].value );
+            let promise = new Promise((resolve, reject) => {
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'php/ingredientes/update.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onload = function() {
+                    if (this.status === 200) {
+                        console.log(this.responseText);
+                        resolve(this.responseText);
+                    } else {
+                        reject(new Error('Request failed with status: ' + this.status));
+                    }
+                };
+                xhr.send("id=" + encodeURIComponent(row.getAttribute("id_ing")) + "&nombre=" + encodeURIComponent(row.cells[0].children[0].value) + "&cantidad=" + encodeURIComponent(row.cells[1].children[0].value));
+            });
+            promises.push(promise);
         });
 
+        // Esperar a que todas las solicitudes se completen
+        Promise.all(promises).then(() => {
+            window.location.reload(); // Recarga la página cuando todas las promesas se resuelven
+        }).catch((error) => {
+            console.error("Error with requests:", error);
+        });
     });
 </script>
 
