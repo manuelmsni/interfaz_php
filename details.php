@@ -105,8 +105,11 @@
 
         xhr.send(datosFormulario);
     });
+
     document.getElementById('ing').addEventListener('submit', function(e) {
+
         e.preventDefault();
+
         toDelete.forEach(id => {
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'php/ingredientes/delete.php', true);
@@ -117,12 +120,12 @@
             };
             xhr.send("id=" + id);
         });
-        toAdd.forEach(row => {
-            toAdd.forEach(row => {
-                var nombreInput = row.cells[0].querySelector('input[name="nombre"]');
-                var cantidadInput = row.cells[1].querySelector('input[name="cantidad"]');
 
-                if (nombreInput && cantidadInput) {
+        toAdd.forEach(row => {
+            var nombreInput = row.cells[0].querySelector('input[name="nombre"]');
+            var cantidadInput = row.cells[1].querySelector('input[name="cantidad"]');
+
+            if (nombreInput && cantidadInput) {
                     var nombre = nombreInput.value;
                     var cantidad = cantidadInput.value;
                 // Rest of your code
@@ -150,6 +153,7 @@
             var params = 'nombre=' + encodeURIComponent(nombre) + '&cantidad=' + encodeURIComponent(cantidad) + '&halua_id=' + encodeURIComponent(halua_id);
             xhr.send(params);
         });
+
         toUpdate.forEach(row => {
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'php/ingredientes/update.php', true);
@@ -160,6 +164,7 @@
             };
             xhr.send("id=" + row.getAttribute("id_ing") + "&nombre=" + row.cells[0].children[0].value + "&cantidad=" + row.cells[1].children[0].value );
         });
+
     });
 </script>
 
