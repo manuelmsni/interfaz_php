@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container">
-
+        <?php include 'php/checkDatabase.php'; ?>
         <?php include 'php/detalle.php'; ?>
 
 </div>

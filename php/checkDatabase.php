@@ -84,6 +84,113 @@ function createTables()
     insertarDulce("Maamoul", 4, "https://marruecoshoy.com/wp-content/uploads/2021/09/maamoul.jpeg", "Pastel de hojaldre relleno de dátiles y aromatizado con agua de azahar y canela");
     insertarDulce("Feqqas", 6, "https://marruecoshoy.com/wp-content/uploads/2021/09/feqqas-1024x576.jpeg", "Galletas de almendra y semillas de sésamo, a menudo se aromatiza con vainilla.");
     insertarDulce("Mhencha", 7, "https://marruecoshoy.com/wp-content/uploads/2021/09/mhencha-1024x1024.jpeg", "Pasta de almendras metida en una hoja de filo (warqa), enrrollada y sumergida en miel a fuego lento.");
+
+    insertarIngrediente(10, "Azúcar glas", 75);
+    insertarIngrediente(10, "Agua de azahar", 1);
+    insertarIngrediente(10, "Mantequilla clarificada", 15);
+    insertarIngrediente(10, "Harina", 250);
+    insertarIngrediente(10, "Agua de rosas", 1);
+    insertarIngrediente(10, "Agua", 10);
+
+    insertarIngrediente(9, "Azúcar", 280);
+    insertarIngrediente(9, "Harina", 1000);
+    insertarIngrediente(9, "Pistachos", 100);
+    insertarIngrediente(9, "Anis en polvo", 3);
+    insertarIngrediente(9, "Avellanas", 200);
+    insertarIngrediente(9, "Leche caliente", 30);
+    insertarIngrediente(9, "Huevos", 400);
+    insertarIngrediente(9, "Agua de azahar", 30);
+    insertarIngrediente(9, "Aceite de girasol", 200);
+    insertarIngrediente(9, "Agua", 10);
+    insertarIngrediente(9, "Almendras", 300);
+    insertarIngrediente(9, "Sésamo tostado y triturado", 75);
+    insertarIngrediente(9, "Café soluble", 5);
+    insertarIngrediente(9, "Levadura química en polvo", 15);
+    insertarIngrediente(9, "Nueces", 200);
+
+    insertarIngrediente(8, "Harina extrafina", 400);
+    insertarIngrediente(8, "Harina de todo uso", 300);
+    insertarIngrediente(8, "Azúcar glas", 200);
+    insertarIngrediente(8, "Lavadura química", 10);
+    insertarIngrediente(8, "Leche", 50);
+    insertarIngrediente(8, "Agua de azahar", 60);
+    insertarIngrediente(8, "Dátiles", 250);
+    insertarIngrediente(8, "Nueces", 30);
+    insertarIngrediente(8, "Pistachos", 50);
+    insertarIngrediente(8, "Almendras", 30);
+
+    insertarIngrediente(7, "Sémola de trigo", 350);
+    insertarIngrediente(7, "Datiles", 100);
+    insertarIngrediente(7, "Azúcar", 200);
+    insertarIngrediente(7, "Canela molida", 5);
+    insertarIngrediente(7, "Azafrán molido", 1);
+    insertarIngrediente(7, "Aceite de oliva", 4);
+    insertarIngrediente(7, "Zumo de limón", 40);
+    insertarIngrediente(7, "Agua de azahar", 10);
+    insertarIngrediente(7, "Agua templada", 200);
+
+    insertarIngrediente(6, "Pistachos ", 250);
+    insertarIngrediente(6, "Azúcar", 200);
+    insertarIngrediente(6, "Canela", 5);
+    insertarIngrediente(6, "Mantequilla", 150);
+    insertarIngrediente(6, "Pasta filo", 250);
+    insertarIngrediente(6, "Agua", 200);
+    insertarIngrediente(6, "Rlladura de limón", 4);
+
+    insertarIngrediente(5, "Harina", 400);
+    insertarIngrediente(5, "Azúcar", 120);
+    insertarIngrediente(5, "Almendras peladas y molidas", 300);
+    insertarIngrediente(5, "Canela en polvo", 5);
+    insertarIngrediente(5, "Mantequilla", 5);
+    insertarIngrediente(5, "Agua de azahar", 40);
+
+    insertarIngrediente(4, "Aceite vegetal", 210);
+    insertarIngrediente(4, "Huevos", 130);
+    insertarIngrediente(4, "Azúcar", 200);
+    insertarIngrediente(4, "Vainilla liquida", 6);
+    insertarIngrediente(4, "Harina", 400);
+    insertarIngrediente(4, "Levadura en polvo", 10);
+    insertarIngrediente(4, "Mermelada de Albaricoque", 625);
+    insertarIngrediente(4, "Agua de azahar", 20);
+    insertarIngrediente(4, "Coco rallado", 200);
+
+    insertarIngrediente(3, "Harina", 500);
+    insertarIngrediente(3, "Aceie de oliva", 25);
+    insertarIngrediente(3, "Huevo", 130);
+    insertarIngrediente(3, "Mantequilla", 80);
+    insertarIngrediente(3, "Almendras", 200);
+    insertarIngrediente(3, "Pistachos", 100);
+    insertarIngrediente(3, "Azúcar", 200);
+    insertarIngrediente(3, "Canela", 12);
+    insertarIngrediente(3, "Agua de azahar", 12);
+    insertarIngrediente(3, "Jengibre en polvo", 5);
+
+    insertarIngrediente(2, "Harina de almendra", 500);
+    insertarIngrediente(2, "Azúcar glass", 200);
+    insertarIngrediente(2, "Mantequilla", 30);
+    insertarIngrediente(2, "Huevos", 130);
+    insertarIngrediente(2, "Levadura en polvo", 10);
+    insertarIngrediente(2, "Agua de azahar", 20);
+    insertarIngrediente(2, "Ralladura de limón", 5);
+    insertarIngrediente(2, "Mermelada de albaricoque", 15);
+    insertarIngrediente(2, "Harina de trigo", 1);
+
+    insertarIngrediente(1, "Harina", 400);
+    insertarIngrediente(1, "Aceite de oliva", 30);
+    insertarIngrediente(1, "Mantequilla", 15);
+    insertarIngrediente(1, "Sal", 5);
+    insertarIngrediente(1, "Azafrán", 1);
+    insertarIngrediente(1, "Agua de azahar", 10);
+    insertarIngrediente(1, "Canela en polvo", 5);
+    insertarIngrediente(1, "Azucar glas", 15);
+    insertarIngrediente(1, "Anís en polvo", 5);
+    insertarIngrediente(1, "Semillas de sésamo trituradas", 100);
+    insertarIngrediente(1, "Almendras tostadas en polvo", 10);
+    insertarIngrediente(1, "levadura en polvo", 5);
+    insertarIngrediente(1, "Aceite de girasol", 200);
+    insertarIngrediente(1, "Miel", 200);
+
+
 }
 
 
@@ -103,9 +210,33 @@ function insertarDulce($nombre, $precio, $imagen, $descripcion) {
     $stmt->bind_param("ssss", $nombre, $precio, $imagen, $descripcion);
 
     if ($stmt->execute()) {
-        showMessage("Dulce $nombre insertado correctamente.");
+        //showMessage("Dulce $nombre insertado correctamente.");
     } else {
         showMessage("Error al insertar el dulce $nombre: " . $stmt->error );
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+
+function insertarIngrediente($halua_id, $nombre, $cantidad) {
+    $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $stmt = $conn->prepare("INSERT INTO " . ING_TABLE_NAME . " (halua_id, nombre, cantidad) VALUES (?, ?, ?)");
+    if (!$stmt) {
+        die("Error al preparar la consulta: " . $conn->error );
+    }
+
+    $stmt->bind_param("isi", $halua_id, $nombre, $cantidad); // Cambio "ssss" a "isi" para representar entero, cadena, entero
+
+    if ($stmt->execute()) {
+        //echo("Ingrediente $nombre del producto $halua_id insertado correctamente.");
+    } else {
+        echo("Error al insertar el dulce $nombre: " . $stmt->error );
     }
 
     $stmt->close();
