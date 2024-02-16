@@ -71,6 +71,13 @@
             };
         }
 
+        document.addEventListener('keydown', function(event) {
+            if (event.shiftKey && (event.key === '=' || event.key === '+')) {
+                event.preventDefault();
+                agregarFila();
+            }
+        });
+
     </script>
 
     <h2>Ingredientes</h2>
