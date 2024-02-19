@@ -242,7 +242,6 @@ function insertarIngrediente($halua_id, $nombre, $cantidad) {
     $stmt->close();
     $conn->close();
 }
-
 function showMessage($message) {
     echo "<script type='text/javascript'>alert('$message');</script>";
 }

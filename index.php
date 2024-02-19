@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="assets/styles/background.css">
 </head>
 <body>
+<div class="buton_ventas">
+        <a href="ventas.php"><button>Ventas</button></a>
+        
+        
+    </div>
+
 <div class="container">
     <h1> - Informe de productos - </h1>
     <?php include 'php/checkDatabase.php'; ?>

@@ -1,12 +1,11 @@
 <?php
 require_once "config.php";
 
-// Verifica si el ID está presente en la URL
 if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
     $id = trim($_GET["id"]);
 
-    session_start(); // Inicia la sesión al principio de tu script
-    $_SESSION['id'] = $id; // Almacena el ID en la sesión
+    session_start(); 
+    $_SESSION['id'] = $id; 
 
     try {
         $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
