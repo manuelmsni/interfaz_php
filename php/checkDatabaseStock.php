@@ -62,6 +62,7 @@ function createTables()
 
         if ($conn->query($sql) === TRUE) {
             showMessage("Se ha creado la tabla " . HALUA_TABLE_NAME_STOCK );
+            insertarDatosPrueba();
         } else {
             showMessage("No se ha podido crear la tabla " . HALUA_TABLE_NAME_STOCK );
         }
@@ -76,6 +77,21 @@ function createTables()
 
 
 
+}
+
+function insertarDatosPrueba() {
+/*
+('Briwat', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Briwat')),
+('Ghriba', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Ghriba')),
+('Chebakia', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Chebakia')),
+('Mhencha', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Mhencha')),
+('Feqqas', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Feqqas')),
+('Maamoul', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Maamoul')),
+('Makrout', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Makrout')),
+('Baklava', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Baklava')),
+('Kaab ghzal', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Kaab ghzal'));
+*/
+    insertarDulce('Kwirat Tlj', 100, getdate());
 }
 
 function actualizarStockEnBD($productoId, $nuevaCantidad) {
@@ -129,8 +145,6 @@ function insertarDulce($nombre, $cantidad, $fecha_produccion) {
     $stmt->close();
     $conn->close();
 }
-
-
 
 function showMessage($message) {
     echo "<script type='text/javascript'>alert('$message');</script>";
