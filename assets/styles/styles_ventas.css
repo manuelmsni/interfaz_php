@@ -1,0 +1,44 @@
+
+
+header {
+    background-color: #03ac2a;
+    color: white;
+    text-align: center;
+    padding: em;
+
+}
+
+.productos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 1em;
+}
+
+.producto {
+    border: 1px solid #ddd;
+    margin: 1em;
+    padding: 1em;
+    text-align: center;
+}
+
+.carrito {
+    border: 1px solid #ddd;
+    padding: 1em;
+    margin: 1em;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1em;
+    bottom: 0;
+    width: 100%;
+}
+#total-precio {
+    text-align: center; 
+    font-weight: bold;
+    font-size: 30px; 
+    margin-top: 50px;
+}
