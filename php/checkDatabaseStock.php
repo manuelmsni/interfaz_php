@@ -51,27 +51,15 @@ function createTables()
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-        $sql = "CREATE TABLE " . HALUA_TABLE_NAME_STOCK . " (
+        $sql = "CREATE TABLE ". HALUA_TABLE_NAME_STOCK . " (
             id_stock INT AUTO_INCREMENT PRIMARY KEY,
             nombre VARCHAR(50) NOT NULL,
             cantidad_stock INT NOT NULL,
             fecha_produccion DATE NOT NULL,
             id INT,
             FOREIGN KEY (id) REFERENCES halua(id)
-        );
+        )";
 
-        INSERT INTO " . HALUA_TABLE_NAME_STOCK . " (nombre, cantidad_stock, fecha_produccion, id)
-        VALUES
-        ('Kwirat Tlj', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Kwirat Tlj')),
-        ('Briwat', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Briwat')),
-        ('Ghriba', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Ghriba')),
-        ('Chebakia', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Chebakia')),
-        ('Mhencha', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Mhencha')),
-        ('Feqqas', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Feqqas')),
-        ('Maamoul', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Maamoul')),
-        ('Makrout', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Makrout')),
-        ('Baklava', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Baklava')),
-        ('Kaab ghzal', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Kaab ghzal'));";
         if ($conn->query($sql) === TRUE) {
             showMessage("Se ha creado la tabla " . HALUA_TABLE_NAME_STOCK );
             insertarDatosPrueba();
@@ -92,18 +80,40 @@ function createTables()
 }
 
 function insertarDatosPrueba() {
-/*
-('Briwat', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Briwat')),
-('Ghriba', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Ghriba')),
-('Chebakia', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Chebakia')),
-('Mhencha', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Mhencha')),
-('Feqqas', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Feqqas')),
-('Maamoul', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Maamoul')),
-('Makrout', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Makrout')),
-('Baklava', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Baklava')),
-('Kaab ghzal', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Kaab ghzal'));
-*/
-    insertarDulce('Kwirat Tlj', 100, getdate());
+
+     try{
+        $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        $sql = "INSERT INTO ". HALUA_TABLE_NAME_STOCK . " (nombre, cantidad_stock, fecha_produccion, id)
+        VALUES
+        ('Kwirat Tlj', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Kwirat Tlj')),
+        ('Briwat', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Briwat')),
+        ('Ghriba', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Ghriba')),
+        ('Chebakia', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Chebakia')),
+        ('Mhencha', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Mhencha')),
+        ('Feqqas', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Feqqas')),
+        ('Maamoul', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Maamoul')),
+        ('Makrout', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Makrout')),
+        ('Baklava', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Baklava')),
+        ('Kaab ghzal', 100, CURDATE(), (SELECT id FROM halua WHERE nombre = 'Kaab ghzal'))";
+
+        if ($conn->query($sql) === TRUE) {
+            showMessage("Se han insertado los datos en " . HALUA_TABLE_NAME_STOCK );
+          
+        } else {
+            showMessage("No se han isertado los datos en " . HALUA_TABLE_NAME_STOCK );
+        }
+    } catch (Exception $e) {
+        showMessage("Error: " . $e->getMessage());
+    } finally {
+        if (isset($conn)) {
+            $conn->close();
+        }
+    }
+
 }
 
 function actualizarStockEnBD($productoId, $nuevaCantidad) {

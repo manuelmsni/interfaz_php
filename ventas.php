@@ -33,7 +33,7 @@
         }
     
         
-        $productos = obtenerProductosDesdeBD();
+        
     }
     ?>
 
@@ -48,7 +48,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($productos as $producto): ?>
+                <?php $productos = obtenerProductosDesdeBD(); foreach ($productos as $producto): ?>
                     <tr>
                         <td><?php echo $producto['nombre']; ?></td>
                         <td><?php echo $producto['precio']; ?> €</td>
@@ -73,10 +73,17 @@
 
     <?php
    
-    $precioTotal = 0;
-    foreach ($productos as $producto) {
-        $precioTotal += $producto['precio'] * $_POST['cantidad'][$producto['nombre']];
-    }
+   $precioTotal = 0;
+   
+   foreach ($productos as $producto) {
+       $nombreProducto = $producto['nombre'];
+   
+       $cantidadVenta = !empty($_POST['cantidad'][$nombreProducto]) ? $_POST['cantidad'][$nombreProducto] : 0;
+   
+       if (is_numeric($cantidadVenta)) {
+           $precioTotal += $producto['precio'] * $cantidadVenta;
+       }
+   }
     ?>
 
 <div id="total-precio">
